@@ -14,12 +14,6 @@ public static class CrearHelix
     static readonly Color Fondo = new Color(0.035f, 0.06f, 0.13f);
     static readonly Color Turquesa = new Color(0.12f, 0.88f, 0.74f);
     static Font fuente;
-    [InitializeOnLoadMethod] static void AlCargar()
-    {
-        EditorApplication.delayCall += () => {
-            if (!File.Exists("Logs/helix-v3.txt") && !EditorApplication.isPlayingOrWillChangePlaymode) Ejecutar();
-        };
-    }
     [MenuItem("Helix/Crear escenas iniciales")]
     public static void Ejecutar()
     {
@@ -64,9 +58,6 @@ public static class CrearHelix
         if(rp!=null) { GraphicsSettings.defaultRenderPipeline=rp; QualitySettings.renderPipeline=rp; }
         EditorBuildSettings.scenes=new[]{new EditorBuildSettingsScene("Assets/Scenes/Menu.unity",true),new EditorBuildSettingsScene("Assets/Scenes/Juego.unity",true)};
         AssetDatabase.SaveAssets();
-        File.WriteAllText("Logs/helix-creado.txt","Escenas Menu y Juego creadas correctamente.");
-        File.WriteAllText("Logs/helix-v2.txt","Torre con sectores de 30 grados.");
-        File.WriteAllText("Logs/helix-v3.txt","Encuadre final y menu legible.");
         EditorSceneManager.OpenScene("Assets/Scenes/Menu.unity");
     }
     static Material Material(string nombre,Color color)
